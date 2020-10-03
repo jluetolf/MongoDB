@@ -3,29 +3,34 @@ package ch.sbb.mongodb;
 import ch.sbb.mongodb.objects.Customer;
 import ch.sbb.mongodb.objects.Department;
 import ch.sbb.mongodb.objects.Employee;
+import ch.sbb.mongodb.objects.Trip;
+import ch.sbb.mongodb.objects.Trips;
+import ch.sbb.mongodb.readers.TripReaderCustom;
 import ch.sbb.mongodb.repository.CustomerRepository;
 import ch.sbb.mongodb.repository.DepartmentRepository;
+import ch.sbb.mongodb.repository.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @SpringBootApplication
 public class MongoDbApplication implements CommandLineRunner {
+	
+	@Autowired
+	private TripReaderCustom tripReader;
 
 	@Autowired
 	private CustomerRepository customerRepository;
 
 	@Autowired
 	private DepartmentRepository departmentRepository;
+	
+	@Autowired
+	private TripRepository tripRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MongoDbApplication.class, args);
@@ -33,7 +38,11 @@ public class MongoDbApplication implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
+		
+		List<Trip> trips = tripReader.readTrips();
 		customerRepository.deleteAll();
+		
+		trips.forEach(trip -> tripRepository.save(trip));
 
 		// save a couple of customers
 		customerRepository.save(new Customer("Alice", "Smith"));
