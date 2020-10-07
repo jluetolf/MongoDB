@@ -39,10 +39,10 @@ public class MongoDbApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		List<Trip> trips = tripReader.readTrips();
-		customerRepository.deleteAll();
-		
-		trips.forEach(trip -> tripRepository.save(trip));
+//		List<Trip> trips = tripReader.readTrips();
+//		customerRepository.deleteAll();
+//		
+//		trips.forEach(trip -> tripRepository.save(trip));
 
 		// save a couple of customers
 		customerRepository.save(new Customer("Alice", "Smith"));
