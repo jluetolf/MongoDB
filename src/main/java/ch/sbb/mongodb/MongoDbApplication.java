@@ -4,11 +4,11 @@ import ch.sbb.mongodb.objects.Customer;
 import ch.sbb.mongodb.objects.Department;
 import ch.sbb.mongodb.objects.Employee;
 import ch.sbb.mongodb.objects.Trip;
-import ch.sbb.mongodb.objects.Trips;
 import ch.sbb.mongodb.readers.TripReaderCustom;
 import ch.sbb.mongodb.repository.CustomerRepository;
 import ch.sbb.mongodb.repository.DepartmentRepository;
 import ch.sbb.mongodb.repository.TripRepository;
+import ch.sbb.postgres.repository.TripTableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -30,7 +30,10 @@ public class MongoDbApplication implements CommandLineRunner {
 	private DepartmentRepository departmentRepository;
 	
 	@Autowired
-	private TripRepository tripRepository;
+	private TripRepository<Trip, Number> tripRepository;
+
+	@Autowired
+	private TripTableRepository tripTableRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MongoDbApplication.class, args);
