@@ -24,13 +24,14 @@ public class CustomCSVReader {
     List<String[]> rows = new ArrayList<>();
     Path pathToFile = Paths.get(this.directory, filename);
     try (CSVReader csvReader = new CSVReader(new FileReader(pathToFile.toString()))) {
-      String[] values = null;
+      String[] values;
       boolean isFirstRow = true;
       while ((values = csvReader.readNext()) != null) {
         if (isFirstRow) {
           isFirstRow = false;
         } else {
           rows.add(values);
+          break;
         }
       }
     }

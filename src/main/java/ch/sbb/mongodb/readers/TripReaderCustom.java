@@ -23,16 +23,17 @@ public class TripReaderCustom extends CustomCSVReader {
     List<Trip> trips = new ArrayList<>();
     List<String[]> rows = getCSVRows(tripFileName);
     Map<String, List<Stoptime>> stoptimes = stoptimeReader.readStoptimes();
-    rows.forEach(row -> {
+    
+/*    rows(row -> {
       Trip trip = createTrip(row);
       if (stoptimes.containsKey(row[2])) {
         trip.setStoptimes(stoptimes.get(row[2]));
       }
       trips.add(trip);
-    });
+    });*/
 
-    
-    
+    Trip trip = createTrip(rows.get(0));
+    trips.add(trip);
     return trips;
   }
 

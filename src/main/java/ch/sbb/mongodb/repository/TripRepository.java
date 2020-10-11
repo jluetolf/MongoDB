@@ -8,6 +8,6 @@ import org.springframework.data.mongodb.repository.Query;
 
 import java.util.List;
 
-public interface TripRepository<T, L extends Number> extends MongoRepository<T, L> {
+public interface TripRepository extends MongoRepository<Trip, Long> {
 	
 }
