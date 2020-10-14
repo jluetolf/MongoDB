@@ -9,5 +9,4 @@ import org.springframework.data.mongodb.repository.Query;
 import java.util.List;
 
 public interface TripRepository extends MongoRepository<Trip, Long> {
-	
 }
